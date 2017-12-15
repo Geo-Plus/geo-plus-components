@@ -1,8 +1,11 @@
 
 $first-color: #ececec;
 $text-color: #222;
-$background-color: #7e807f;
-/* $second-color: #1bc2a2; */
+$background-color: #288bbd;
+
+.fa /deep/ {
+    margin-right: 0.5em;
+}
 
 ul.main-navigation /deep/ li ul li { border-top: 0; }
 ul.main-navigation:before,
@@ -22,18 +25,13 @@ ul.main-navigation /deep/ {
     list-style: none;
     padding: 0;
     margin: 0;
-    background: #282a2b;
-    height: 2em;  
+    background: $background-color;
     li {
         display: block;
         position: relative;
         float: left;
-        background: #282a2b;
+        background:$background-color;
     }
-      
-      /* This hides the dropdowns */
-      
-      
     li ul { 
         display: none; 
         padding-left: 0;
@@ -46,17 +44,12 @@ ul.main-navigation /deep/ {
         text-decoration: none;
         white-space: nowrap;
         color: white;
-        height: 1em;
         font-family: Roboto, Arial, Helvetica, sans-serif;
     }
       
     li a:hover { 
         color: white;
     }
-      
-      /* Display the dropdown */
-      
-      
     li:hover > gpc-navbar-item > ul {
         display: block;
         position: absolute;
@@ -74,19 +67,9 @@ ul.main-navigation /deep/ {
         color: white;
     }
       
-      
-      
-      /* Displays second level dropdowns to the right of the first level dropdown */
-      
-      
     ul ul {
         left: 100%;
         top: 0;
     }
-      
-      /* Simple clearfix */
-      
-      
-      
       
 }

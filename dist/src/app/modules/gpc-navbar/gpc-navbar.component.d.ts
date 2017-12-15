@@ -1,6 +1,4 @@
-import { OnInit } from '@angular/core';
-export declare class GpcNavbarComponent implements OnInit {
+export declare class GpcNavbarComponent {
     menu: any[];
     constructor();
-    ngOnInit(): void;
 }

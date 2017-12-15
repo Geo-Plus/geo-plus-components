@@ -2,7 +2,7 @@
 <ul class="main-navigation">
     <li class="gpc-menu-item" *ngFor="let item of menu">
         <a href="#" [routerLink]="item.routerLink">
-            <span class="fa " *ngIf="item.icon" [ngClass]="item.icon">*</span>
+            <span class="fa " *ngIf="item.icon" [ngClass]="item.icon"></span>
             {{ item.label }}
             <span class="gpc-icon-down fa fa-chevron-down" *ngIf="item.items  && item.items.length"></span>
         </a>

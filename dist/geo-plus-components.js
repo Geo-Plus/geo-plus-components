@@ -5,39 +5,32 @@ import { RouterModule } from '@angular/router';
 class GpcNavbarComponent {
     constructor() {
         this.menu = [{
-                label: "Test1"
+                label: "Item1"
             },
             {
-                label: "Test2",
+                label: "Item2",
                 items: [{
-                        label: "Not very long test3"
+                        label: "Item2.1"
                     }, {
-                        label: "test4",
+                        label: "Item2.2",
                         items: [
                             {
-                                label: "Very long test test4.1"
+                                label: "Item2.2.1"
                             },
                             {
-                                label: "test4.2",
-                                routerLink: "/dict",
+                                label: "Item2.2.2",
                                 items: [{
-                                        label: "test4.2.1"
+                                        label: "Item2.2.2.1"
                                     }, {
-                                        label: "test4.2.2"
+                                        label: "Item2.2.2.2"
                                     }]
                             }
                         ]
                     }, {
-                        label: "test5"
+                        label: "Item2.3"
                     }]
             }
         ];
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        console.log(1, this.menu);
     }
 }
 GpcNavbarComponent.decorators = [
@@ -48,7 +41,7 @@ GpcNavbarComponent.decorators = [
       <ul class="main-navigation">
           <li class="gpc-menu-item" *ngFor="let item of menu">
               <a href="#" [routerLink]="item.routerLink">
-                  <span class="fa " *ngIf="item.icon" [ngClass]="item.icon">*</span>
+                  <span class="fa " *ngIf="item.icon" [ngClass]="item.icon"></span>
                   {{ item.label }}
                   <span class="gpc-icon-down fa fa-chevron-down" *ngIf="item.items  && item.items.length"></span>
               </a>
@@ -57,7 +50,9 @@ GpcNavbarComponent.decorators = [
       </ul>
     `,
                 styles: [`
-      /* $second-color: #1bc2a2; */
+      .fa /deep/ {
+        margin-right: 0.5em; }
+
       ul.main-navigation /deep/ li ul li {
         border-top: 0; }
 
@@ -79,17 +74,12 @@ GpcNavbarComponent.decorators = [
         list-style: none;
         padding: 0;
         margin: 0;
-        background: #282a2b;
-        height: 2em;
-        /* This hides the dropdowns */
-        /* Display the dropdown */
-        /* Displays second level dropdowns to the right of the first level dropdown */
-        /* Simple clearfix */ }
+        background: #288bbd; }
         ul.main-navigation /deep/ li {
           display: block;
           position: relative;
           float: left;
-          background: #282a2b; }
+          background: #288bbd; }
         ul.main-navigation /deep/ li ul {
           display: none;
           padding-left: 0;
@@ -101,7 +91,6 @@ GpcNavbarComponent.decorators = [
           text-decoration: none;
           white-space: nowrap;
           color: white;
-          height: 1em;
           font-family: Roboto, Arial, Helvetica, sans-serif; }
         ul.main-navigation /deep/ li a:hover {
           color: white; }
@@ -133,12 +122,6 @@ GpcNavbarComponent.propDecorators = {
 class GpcNavbarItemComponent {
     constructor() {
         this.level = 1;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        console.log(2, this.items);
     }
 }
 GpcNavbarItemComponent.decorators = [

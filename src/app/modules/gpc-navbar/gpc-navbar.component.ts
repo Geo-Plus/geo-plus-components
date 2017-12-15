@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { GpcNavbarItemComponent } from './gpc-navbar-item/gpc-navbar-item.component';
 
 @Component({
@@ -6,41 +6,36 @@ import { GpcNavbarItemComponent } from './gpc-navbar-item/gpc-navbar-item.compon
     templateUrl: './gpc-navbar.component.html',
     styleUrls: ['./gpc-navbar.component.scss']
 })
-export class GpcNavbarComponent implements OnInit {
+export class GpcNavbarComponent {
 
     @Input() menu:any[] = [{
-            label: "Test1"
+            label: "Item1"
         },
         {
-            label: "Test2",
+            label: "Item2",
             items: [{
-                label: "Not very long test3"
+                label: "Item2.1"
             }, {
-                label: "test4",
+                label: "Item2.2",
                 items: [
                     {
-                        label: "Very long test test4.1"
+                        label: "Item2.2.1"
                     },
                     {
-                        label: "test4.2",
-                        routerLink: "/dict",
+                        label: "Item2.2.2",
                         items: [{
-                            label: "test4.2.1"
+                            label: "Item2.2.2.1"
                         },{
-                            label: "test4.2.2"
+                            label: "Item2.2.2.2"
                         }]
                     }                    
                 ]
             }, {
-                label: "test5"
+                label: "Item2.3"
             }]
         }
     ];
 
     constructor() { }
-
-    ngOnInit() {
-        console.log(1, this.menu);
-    }
 
 }
