@@ -13,18 +13,18 @@ export class GpcNavbarComponent implements OnInit {
         },
         {
             label: "Test2",
-            children: [{
+            items: [{
                 label: "Not very long test3"
             }, {
                 label: "test4",
-                children: [
+                items: [
                     {
                         label: "Very long test test4.1"
                     },
                     {
                         label: "test4.2",
                         routerLink: "/dict",
-                        children: [{
+                        items: [{
                             label: "test4.2.1"
                         },{
                             label: "test4.2.2"

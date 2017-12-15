@@ -4,9 +4,9 @@
         <a href="#" [routerLink]="item.routerLink">
             <span class="fa " *ngIf="item.icon" [ngClass]="item.icon">*</span>
             {{ item.label }}
-            <span class="gpc-icon-down fa fa-chevron-down" *ngIf="item.children  && item.children.length"></span>
+            <span class="gpc-icon-down fa fa-chevron-down" *ngIf="item.items  && item.items.length"></span>
         </a>
-        <gpc-navbar-item [items]="item.children" *ngIf="item.children && item.children.length"></gpc-navbar-item>
+        <gpc-navbar-item [items]="item.items" *ngIf="item.items && item.items.length"></gpc-navbar-item>
     </li>
 </ul>
 
