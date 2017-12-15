@@ -9,18 +9,18 @@ class GpcNavbarComponent {
             },
             {
                 label: "Test2",
-                children: [{
+                items: [{
                         label: "Not very long test3"
                     }, {
                         label: "test4",
-                        children: [
+                        items: [
                             {
                                 label: "Very long test test4.1"
                             },
                             {
                                 label: "test4.2",
                                 routerLink: "/dict",
-                                children: [{
+                                items: [{
                                         label: "test4.2.1"
                                     }, {
                                         label: "test4.2.2"
@@ -50,9 +50,9 @@ GpcNavbarComponent.decorators = [
               <a href="#" [routerLink]="item.routerLink">
                   <span class="fa " *ngIf="item.icon" [ngClass]="item.icon">*</span>
                   {{ item.label }}
-                  <span class="gpc-icon-down fa fa-chevron-down" *ngIf="item.children  && item.children.length"></span>
+                  <span class="gpc-icon-down fa fa-chevron-down" *ngIf="item.items  && item.items.length"></span>
               </a>
-              <gpc-navbar-item [items]="item.children" *ngIf="item.children && item.children.length"></gpc-navbar-item>
+              <gpc-navbar-item [items]="item.items" *ngIf="item.items && item.items.length"></gpc-navbar-item>
           </li>
       </ul>
     `,
@@ -138,6 +138,7 @@ class GpcNavbarItemComponent {
      * @return {?}
      */
     ngOnInit() {
+        console.log(2, this.items);
     }
 }
 GpcNavbarItemComponent.decorators = [
@@ -149,8 +150,8 @@ GpcNavbarItemComponent.decorators = [
               <a href="#" [routerLink]="item.routerLink">
                   <span class="fa " *ngIf="item.icon" [ngClass]="item.icon"></span>
                   {{ item.label }}
-                  <span class="gpc-icon-right fa fa-chevron-right" *ngIf="item.children"></span></a>
-              <gpc-navbar-item [level]="level + 1" [ngClass]="{'-hasSubmenu':true}" [items]="item.children" *ngIf="item.children && item.children.length"></gpc-navbar-item>
+                  <span class="gpc-icon-right fa fa-chevron-right" *ngIf="item.items"></span></a>
+              <gpc-navbar-item [level]="level + 1" [ngClass]="{'-hasSubmenu':true}" [items]="item.items" *ngIf="item.items && item.items.length"></gpc-navbar-item>
           </li>
       </ul>
     `,
