@@ -1,4 +1,4 @@
-import { Component, Input, NgModule, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, NgModule, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -45,19 +45,25 @@ class GpcNavbarComponent {
     onResize() {
         this.isSmall = window.innerWidth < this.mobileWidth;
     }
+    /**
+     * @return {?}
+     */
+    onMouse() {
+        this.isHidden = false;
+    }
 }
 GpcNavbarComponent.decorators = [
     { type: Component, args: [{
                 selector: 'gpc-navbar',
                 template: `
       <ul class="main-navigation" *ngIf="!isSmall" (window:resize)="onResize()">
-          <li class="gpc-menu-item" *ngFor="let item of menu">
+          <li class="gpc-menu-item" *ngFor="let item of menu" (mouseover)="onMouse()">
               <a href="#" [routerLink]="item.routerLink">
                   <span class="fa fa-fw" *ngIf="item.icon" [ngClass]="item.icon"></span>
                   {{ item.label }}
                   <span class="gpc-icon-down fa fa-fw fa-caret-down" *ngIf="item.items  && item.items.length"></span>
               </a>
-              <gpc-navbar-item [items]="item.items" *ngIf="item.items && item.items.length"></gpc-navbar-item>
+              <gpc-navbar-item [items]="item.items" [(hidden)]="isHidden" *ngIf="item.items && item.items.length"></gpc-navbar-item>
           </li>
       </ul>
 
@@ -127,6 +133,9 @@ GpcNavbarComponent.decorators = [
         ul.main-navigation /deep/ ul ul {
           left: 100%;
           top: 0; }
+
+      .gpc-menu-item {
+        border-left: 1px solid transparent; }
     `]
             },] },
 ];
@@ -142,22 +151,30 @@ GpcNavbarComponent.propDecorators = {
 class GpcNavbarItemComponent {
     constructor() {
         this.level = 1;
+        this.hiddenChange = new EventEmitter;
     }
     /**
-     * @param {?} el
+     * @param {?} value
      * @return {?}
      */
-    hide(el) {
-        // to do
+    set hidden(value) {
+        this._hidden = value;
+    }
+    /**
+     * @return {?}
+     */
+    onClick() {
+        this._hidden = true;
+        this.hiddenChange.emit(this._hidden);
     }
 }
 GpcNavbarItemComponent.decorators = [
     { type: Component, args: [{
                 selector: 'gpc-navbar-item',
                 template: `
-      <ul #cul class="gpc-menu-drop-item" [ngStyle]="{'z-index':level+10000}">
+      <ul #cul class="gpc-menu-drop-item" [ngStyle]="{'z-index':level+10000}" [ngClass]="{'gpc-selected' : _hidden }">
           <li class="gpc-submenu-item" *ngFor="let item of items">
-              <a href="#" [routerLink]="item.routerLink" (click)="hide(item)">
+              <a href="#" [routerLink]="item.routerLink" (click)="onClick()">
                   <span class="fa fa-fw " *ngIf="item.icon" [ngClass]="item.icon"></span>
                   {{ item.label }}
                   <span class="gpc-icon-right fa fa-fw fa-caret-right" *ngIf="item.items"></span></a>
@@ -175,6 +192,9 @@ GpcNavbarItemComponent.decorators = [
 
       .gpc-submenu-item a {
         padding-right: 2em; }
+
+      .gpc-selected {
+        display: none !important; }
     `]
             },] },
 ];
@@ -185,7 +205,8 @@ GpcNavbarItemComponent.ctorParameters = () => [];
 GpcNavbarItemComponent.propDecorators = {
     'items': [{ type: Input },],
     'level': [{ type: Input },],
-    'el': [{ type: ViewChild, args: ['cul',] },],
+    'hidden': [{ type: Input },],
+    'hiddenChange': [{ type: Output },],
 };
 
 class GpcNavbar {

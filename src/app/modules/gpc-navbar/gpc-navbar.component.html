@@ -1,11 +1,11 @@
 <ul class="main-navigation" *ngIf="!isSmall" (window:resize)="onResize()">
-    <li class="gpc-menu-item" *ngFor="let item of menu">
+    <li class="gpc-menu-item" *ngFor="let item of menu" (mouseover)="onMouse()">
         <a href="#" [routerLink]="item.routerLink">
             <span class="fa fa-fw" *ngIf="item.icon" [ngClass]="item.icon"></span>
             {{ item.label }}
             <span class="gpc-icon-down fa fa-fw fa-caret-down" *ngIf="item.items  && item.items.length"></span>
         </a>
-        <gpc-navbar-item [items]="item.items" *ngIf="item.items && item.items.length"></gpc-navbar-item>
+        <gpc-navbar-item [items]="item.items" [(hidden)]="isHidden" *ngIf="item.items && item.items.length"></gpc-navbar-item>
     </li>
 </ul>
 

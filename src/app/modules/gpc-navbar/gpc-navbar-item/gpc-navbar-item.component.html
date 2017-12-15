@@ -1,6 +1,6 @@
-<ul #cul class="gpc-menu-drop-item" [ngStyle]="{'z-index':level+10000}">
+<ul #cul class="gpc-menu-drop-item" [ngStyle]="{'z-index':level+10000}" [ngClass]="{'gpc-selected' : _hidden }">
     <li class="gpc-submenu-item" *ngFor="let item of items">
-        <a href="#" [routerLink]="item.routerLink" (click)="hide(item)">
+        <a href="#" [routerLink]="item.routerLink" (click)="onClick()">
             <span class="fa fa-fw " *ngIf="item.icon" [ngClass]="item.icon"></span>
             {{ item.label }}
             <span class="gpc-icon-right fa fa-fw fa-caret-right" *ngIf="item.items"></span></a>

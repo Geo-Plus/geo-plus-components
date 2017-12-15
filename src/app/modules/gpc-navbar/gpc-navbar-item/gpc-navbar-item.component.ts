@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'gpc-navbar-item',
@@ -9,13 +9,20 @@ export class GpcNavbarItemComponent {
 
     @Input() items:any;
     @Input() level:number = 1;
+    @Input() set hidden(value) {
+        this._hidden = value;
+    }
+    @Output() hiddenChange:EventEmitter<any> = new EventEmitter;
 
-    @ViewChild('cul') el:ElementRef;
+    //@ViewChild('cul') el:ElementRef;
+
+    _hidden:boolean;
 
     constructor() { }
 
-    hide(el) {
-        // to do
+    onClick() {
+        this._hidden = true;
+        this.hiddenChange.emit(this._hidden);
     }
 
 }

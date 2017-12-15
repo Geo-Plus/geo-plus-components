@@ -1,8 +1,10 @@
-import { ElementRef } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 export declare class GpcNavbarItemComponent {
     items: any;
     level: number;
-    el: ElementRef;
+    hidden: any;
+    hiddenChange: EventEmitter<any>;
+    _hidden: boolean;
     constructor();
-    hide(el: any): void;
+    onClick(): void;
 }

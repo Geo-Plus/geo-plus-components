@@ -38,6 +38,7 @@ export class GpcNavbarComponent {
     ];
 
     isSmall:boolean;
+    isHidden:boolean;
 
     constructor() { }
 
@@ -47,6 +48,10 @@ export class GpcNavbarComponent {
 
     onResize() {
         this.isSmall = window.innerWidth < this.mobileWidth;
+    }
+
+    onMouse() {
+        this.isHidden = false;
     }
 
 }
