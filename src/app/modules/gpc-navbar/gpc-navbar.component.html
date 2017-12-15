@@ -1,3 +1,12 @@
-<p>
-  gpc-navbar works!
-</p>
+
+<ul class="main-navigation">
+    <li class="gpc-menu-item" *ngFor="let item of menu">
+        <a href="#" [routerLink]="item.routerLink">
+            <span class="fa " *ngIf="item.icon" [ngClass]="item.icon">*</span>
+            {{ item.label }}
+            <span class="gpc-icon-down fa fa-chevron-down" *ngIf="item.children  && item.children.length"></span>
+        </a>
+        <gpc-navbar-item [items]="item.children" *ngIf="item.children && item.children.length"></gpc-navbar-item>
+    </li>
+</ul>
+

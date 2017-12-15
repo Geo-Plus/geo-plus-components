@@ -1,0 +1,9 @@
+<ul class="gpc-menu-drop-item" [ngStyle]="{'z-index':level}">
+    <li *ngFor="let item of items">
+        <a href="#" [routerLink]="item.routerLink">
+            <span class="fa " *ngIf="item.icon" [ngClass]="item.icon"></span>
+            {{ item.label }}
+            <span class="gpc-icon-right fa fa-chevron-right" *ngIf="item.children"></span></a>
+        <gpc-navbar-item [level]="level + 1" [ngClass]="{'-hasSubmenu':true}" [items]="item.children" *ngIf="item.children && item.children.length"></gpc-navbar-item>
+    </li>
+</ul>
