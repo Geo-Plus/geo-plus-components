@@ -59,7 +59,7 @@ var GpcNavbarItemComponent = (function () {
 GpcNavbarItemComponent.decorators = [
     { type: core.Component, args: [{
                 selector: 'gpc-navbar-item',
-                template: "\n      <ul class=\"gpc-menu-drop-item\" [ngStyle]=\"{'z-index':level}\">\n          <li *ngFor=\"let item of items\">\n              <a href=\"#\" [routerLink]=\"item.routerLink\">\n                  <span class=\"fa fa-fw \" *ngIf=\"item.icon\" [ngClass]=\"item.icon\"></span>\n                  {{ item.label }}\n                  <span class=\"gpc-icon-right fa fa-fw fa-caret-right\" *ngIf=\"item.items\"></span></a>\n              <gpc-navbar-item [level]=\"level + 1\" [ngClass]=\"{'-hasSubmenu':true}\" [items]=\"item.items\" *ngIf=\"item.items && item.items.length\"></gpc-navbar-item>\n          </li>\n      </ul>\n    ",
+                template: "\n      <ul class=\"gpc-menu-drop-item\" [ngStyle]=\"{'z-index':level+10000}\">\n          <li *ngFor=\"let item of items\">\n              <a href=\"#\" [routerLink]=\"item.routerLink\">\n                  <span class=\"fa fa-fw \" *ngIf=\"item.icon\" [ngClass]=\"item.icon\"></span>\n                  {{ item.label }}\n                  <span class=\"gpc-icon-right fa fa-fw fa-caret-right\" *ngIf=\"item.items\"></span></a>\n              <gpc-navbar-item [level]=\"level + 1\" [ngClass]=\"{'-hasSubmenu':true}\" [items]=\"item.items\" *ngIf=\"item.items && item.items.length\"></gpc-navbar-item>\n          </li>\n      </ul>\n    ",
                 styles: ["\n      .gpc-icon-right {\n        float: right; }\n\n      .gpc-menu-drop-item {\n        min-width: 10em; }\n    "]
             },] },
 ];

@@ -125,7 +125,7 @@ GpcNavbarItemComponent.decorators = [
     { type: Component, args: [{
                 selector: 'gpc-navbar-item',
                 template: `
-      <ul class="gpc-menu-drop-item" [ngStyle]="{'z-index':level}">
+      <ul class="gpc-menu-drop-item" [ngStyle]="{'z-index':level+10000}">
           <li *ngFor="let item of items">
               <a href="#" [routerLink]="item.routerLink">
                   <span class="fa fa-fw " *ngIf="item.icon" [ngClass]="item.icon"></span>
