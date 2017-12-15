@@ -13,7 +13,7 @@ export class GpcNavbarItemComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        
+        console.log(2, this.items);
     }
 
 }
