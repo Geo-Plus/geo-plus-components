@@ -1,7 +1,12 @@
 .gpc-icon-right {
-    float: right;
+    position: absolute;
+    right:0.25em;
 }
 
 .gpc-menu-drop-item {
     min-width: 10em;
+}
+
+.gpc-submenu-item a {
+    padding-right: 2em;
 }

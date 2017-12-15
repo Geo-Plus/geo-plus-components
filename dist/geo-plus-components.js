@@ -1,9 +1,10 @@
-import { Component, Input, NgModule } from '@angular/core';
+import { Component, Input, NgModule, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 class GpcNavbarComponent {
     constructor() {
+        this.mobileWidth = 800;
         this.menu = [{
                 label: "Item1"
             },
@@ -32,13 +33,24 @@ class GpcNavbarComponent {
             }
         ];
     }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.onResize();
+    }
+    /**
+     * @return {?}
+     */
+    onResize() {
+        this.isSmall = window.innerWidth < this.mobileWidth;
+    }
 }
 GpcNavbarComponent.decorators = [
     { type: Component, args: [{
                 selector: 'gpc-navbar',
                 template: `
-
-      <ul class="main-navigation">
+      <ul class="main-navigation" *ngIf="!isSmall" (window:resize)="onResize()">
           <li class="gpc-menu-item" *ngFor="let item of menu">
               <a href="#" [routerLink]="item.routerLink">
                   <span class="fa fa-fw" *ngIf="item.icon" [ngClass]="item.icon"></span>
@@ -46,6 +58,16 @@ GpcNavbarComponent.decorators = [
                   <span class="gpc-icon-down fa fa-fw fa-caret-down" *ngIf="item.items  && item.items.length"></span>
               </a>
               <gpc-navbar-item [items]="item.items" *ngIf="item.items && item.items.length"></gpc-navbar-item>
+          </li>
+      </ul>
+
+      <ul class="main-navigation" *ngIf="isSmall" (window:resize)="onResize()">
+          <li class="gpc-menu-item">
+              <a href="#">
+                  <span class="fa fa-navicon"></span>
+                  <span class="gpc-icon-down fa fa-fw fa-caret-down"></span>
+              </a>
+              <gpc-navbar-item [items]="menu"></gpc-navbar-item>
           </li>
       </ul>
     `,
@@ -113,6 +135,7 @@ GpcNavbarComponent.decorators = [
  */
 GpcNavbarComponent.ctorParameters = () => [];
 GpcNavbarComponent.propDecorators = {
+    'mobileWidth': [{ type: Input },],
     'menu': [{ type: Input },],
 };
 
@@ -120,14 +143,21 @@ class GpcNavbarItemComponent {
     constructor() {
         this.level = 1;
     }
+    /**
+     * @param {?} el
+     * @return {?}
+     */
+    hide(el) {
+        // to do
+    }
 }
 GpcNavbarItemComponent.decorators = [
     { type: Component, args: [{
                 selector: 'gpc-navbar-item',
                 template: `
-      <ul class="gpc-menu-drop-item" [ngStyle]="{'z-index':level+10000}">
-          <li *ngFor="let item of items">
-              <a href="#" [routerLink]="item.routerLink">
+      <ul #cul class="gpc-menu-drop-item" [ngStyle]="{'z-index':level+10000}">
+          <li class="gpc-submenu-item" *ngFor="let item of items">
+              <a href="#" [routerLink]="item.routerLink" (click)="hide(item)">
                   <span class="fa fa-fw " *ngIf="item.icon" [ngClass]="item.icon"></span>
                   {{ item.label }}
                   <span class="gpc-icon-right fa fa-fw fa-caret-right" *ngIf="item.items"></span></a>
@@ -137,10 +167,14 @@ GpcNavbarItemComponent.decorators = [
     `,
                 styles: [`
       .gpc-icon-right {
-        float: right; }
+        position: absolute;
+        right: 0.25em; }
 
       .gpc-menu-drop-item {
         min-width: 10em; }
+
+      .gpc-submenu-item a {
+        padding-right: 2em; }
     `]
             },] },
 ];
@@ -151,6 +185,7 @@ GpcNavbarItemComponent.ctorParameters = () => [];
 GpcNavbarItemComponent.propDecorators = {
     'items': [{ type: Input },],
     'level': [{ type: Input },],
+    'el': [{ type: ViewChild, args: ['cul',] },],
 };
 
 class GpcNavbar {

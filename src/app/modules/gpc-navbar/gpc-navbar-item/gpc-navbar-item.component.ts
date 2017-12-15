@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'gpc-navbar-item',
@@ -10,6 +10,12 @@ export class GpcNavbarItemComponent {
     @Input() items:any;
     @Input() level:number = 1;
 
+    @ViewChild('cul') el:ElementRef;
+
     constructor() { }
+
+    hide(el) {
+        // to do
+    }
 
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { GpcNavbarItemComponent } from './gpc-navbar-item/gpc-navbar-item.component';
 
 @Component({
@@ -8,6 +8,7 @@ import { GpcNavbarItemComponent } from './gpc-navbar-item/gpc-navbar-item.compon
 })
 export class GpcNavbarComponent {
 
+    @Input() mobileWidth:number = 800;
     @Input() menu:any[] = [{
             label: "Item1"
         },
@@ -36,6 +37,16 @@ export class GpcNavbarComponent {
         }
     ];
 
+    isSmall:boolean;
+
     constructor() { }
+
+    ngOnInit() {
+        this.onResize();
+    }
+
+    onResize() {
+        this.isSmall = window.innerWidth < this.mobileWidth;
+    }
 
 }

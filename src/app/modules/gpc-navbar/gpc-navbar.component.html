@@ -1,5 +1,4 @@
-
-<ul class="main-navigation">
+<ul class="main-navigation" *ngIf="!isSmall" (window:resize)="onResize()">
     <li class="gpc-menu-item" *ngFor="let item of menu">
         <a href="#" [routerLink]="item.routerLink">
             <span class="fa fa-fw" *ngIf="item.icon" [ngClass]="item.icon"></span>
@@ -10,3 +9,12 @@
     </li>
 </ul>
 
+<ul class="main-navigation" *ngIf="isSmall" (window:resize)="onResize()">
+    <li class="gpc-menu-item">
+        <a href="#">
+            <span class="fa fa-navicon"></span>
+            <span class="gpc-icon-down fa fa-fw fa-caret-down"></span>
+        </a>
+        <gpc-navbar-item [items]="menu"></gpc-navbar-item>
+    </li>
+</ul>
