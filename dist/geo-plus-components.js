@@ -41,18 +41,15 @@ GpcNavbarComponent.decorators = [
       <ul class="main-navigation">
           <li class="gpc-menu-item" *ngFor="let item of menu">
               <a href="#" [routerLink]="item.routerLink">
-                  <span class="fa " *ngIf="item.icon" [ngClass]="item.icon"></span>
+                  <span class="fa fa-fw" *ngIf="item.icon" [ngClass]="item.icon"></span>
                   {{ item.label }}
-                  <span class="gpc-icon-down fa fa-chevron-down" *ngIf="item.items  && item.items.length"></span>
+                  <span class="gpc-icon-down fa fa-fw fa-caret-down" *ngIf="item.items  && item.items.length"></span>
               </a>
               <gpc-navbar-item [items]="item.items" *ngIf="item.items && item.items.length"></gpc-navbar-item>
           </li>
       </ul>
     `,
                 styles: [`
-      .fa /deep/ {
-        margin-right: 0.5em; }
-
       ul.main-navigation /deep/ li ul li {
         border-top: 0; }
 
@@ -131,9 +128,9 @@ GpcNavbarItemComponent.decorators = [
       <ul class="gpc-menu-drop-item" [ngStyle]="{'z-index':level}">
           <li *ngFor="let item of items">
               <a href="#" [routerLink]="item.routerLink">
-                  <span class="fa " *ngIf="item.icon" [ngClass]="item.icon"></span>
+                  <span class="fa fa-fw " *ngIf="item.icon" [ngClass]="item.icon"></span>
                   {{ item.label }}
-                  <span class="gpc-icon-right fa fa-chevron-right" *ngIf="item.items"></span></a>
+                  <span class="gpc-icon-right fa fa-fw fa-caret-right" *ngIf="item.items"></span></a>
               <gpc-navbar-item [level]="level + 1" [ngClass]="{'-hasSubmenu':true}" [items]="item.items" *ngIf="item.items && item.items.length"></gpc-navbar-item>
           </li>
       </ul>
@@ -144,6 +141,9 @@ GpcNavbarItemComponent.decorators = [
 
       .gpc-menu-drop-item {
         min-width: 10em; }
+
+      .fa {
+        margin-right: 0.5em; }
     `]
             },] },
 ];

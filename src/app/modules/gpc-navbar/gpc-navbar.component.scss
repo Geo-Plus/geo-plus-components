@@ -3,10 +3,6 @@ $first-color: #ececec;
 $text-color: #222;
 $background-color: #288bbd;
 
-.fa /deep/ {
-    margin-right: 0.5em;
-}
-
 ul.main-navigation /deep/ li ul li { border-top: 0; }
 ul.main-navigation:before,
 ul.main-navigation:after {
