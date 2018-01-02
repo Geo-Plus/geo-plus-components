@@ -77,7 +77,6 @@ var GpcNavbarItemComponent = (function () {
      * @return {?}
      */
     GpcNavbarItemComponent.prototype.onClick = function (item) {
-        console.log(0, item);
         if (item && item.items && item.items.length)
             return;
         this.onSelected.emit();

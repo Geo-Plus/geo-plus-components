@@ -158,7 +158,6 @@ class GpcNavbarItemComponent {
      * @return {?}
      */
     onClick(item) {
-        console.log(0, item);
         if (item && item.items && item.items.length)
             return;
         this.onSelected.emit();
