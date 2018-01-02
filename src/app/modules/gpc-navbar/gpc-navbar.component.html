@@ -5,16 +5,16 @@
             {{ item.label }}
             <span class="gpc-icon-down fa fa-fw fa-caret-down" *ngIf="item.items  && item.items.length"></span>
         </a>
-        <gpc-navbar-item [items]="item.items" [(hidden)]="isHidden" *ngIf="item.items && item.items.length"></gpc-navbar-item>
+        <gpc-navbar-item [items]="item.items" [(hidden)]="isHidden" (onSelected)="isHidden = true" *ngIf="item.items && item.items.length"></gpc-navbar-item>
     </li>
 </ul>
 
-<ul class="main-navigation" *ngIf="isSmall" (window:resize)="onResize()">
-    <li class="gpc-menu-item">
+<ul class="main-navigation" *ngIf="isSmall" (window:resize)="onResize()" (mouseover)="onMouse()">
+    <li class="gpc-menu-item" (mouseover)="onMouse()">
         <a href="#">
             <span class="fa fa-navicon"></span>
             <span class="gpc-icon-down fa fa-fw fa-caret-down"></span>
         </a>
-        <gpc-navbar-item [items]="menu"></gpc-navbar-item>
+        <gpc-navbar-item [items]="menu" [(hidden)]="isHidden" (onSelected)="isHidden = true"></gpc-navbar-item>
     </li>
 </ul>
