@@ -34,7 +34,7 @@ ul.main-navigation /deep/ {
         display: block;
         position: relative;
         float: left;
-        height: 34px;
+        max-height: 34px;
         background:$background-color;
     }
     li ul { 

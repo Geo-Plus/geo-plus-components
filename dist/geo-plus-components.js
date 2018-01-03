@@ -124,7 +124,7 @@ GpcNavbarComponent.decorators = [
           display: block;
           position: relative;
           float: left;
-          height: 34px;
+          max-height: 34px;
           background: #288bbd; }
         ul.main-navigation /deep/ li ul {
           display: none;
