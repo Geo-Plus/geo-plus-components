@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { GpcNavbarItemComponent } from './gpc-navbar-item/gpc-navbar-item.component';
 
 @Component({
@@ -34,8 +34,12 @@ export class GpcNavbarComponent {
             }, {
                 label: "Item2.3"
             }]
-        }
+        },
+        { label: "Item3" },{ label: "Item4" },{ label: "Item5" },{ label: "Item6" },{ label: "Item7" },{ label: "Item8" },{ label: "Item9" },
+        { label: "Item13" },{ label: "Item14" },{ label: "Item15" },{ label: "Item16" },{ label: "Item17" },{ label: "Item18" },{ label: "Item19" }
     ];
+
+    @ViewChild('mbar') private mbar: ElementRef;
 
     isSmall:boolean;
     isHidden:boolean;
@@ -46,8 +50,13 @@ export class GpcNavbarComponent {
         this.onResize();
     }
 
+    ngAfterViewInit() {
+        this.onResize();
+    }
+
     onResize() {
         this.isSmall = window.innerWidth < this.mobileWidth;
+        if (this.mbar && this.mbar.nativeElement.offsetHeight > 34) this.isSmall = true;
     }
 
     onMouse() {

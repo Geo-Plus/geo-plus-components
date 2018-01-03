@@ -18,14 +18,23 @@ li.gpc-menu-item:hover a {
 ul.main-navigation:after { clear: both; }
 
 ul.main-navigation /deep/ {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto !important;
     list-style: none;
     padding: 0;
     margin: 0;
     background: $background-color;
+    overflow: visible !important;
+    user-select: none;
+    outline: 0;
     li {
         display: block;
         position: relative;
         float: left;
+        height: 34px;
         background:$background-color;
     }
     li ul { 

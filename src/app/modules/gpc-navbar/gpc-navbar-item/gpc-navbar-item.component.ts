@@ -15,7 +15,7 @@ export class GpcNavbarItemComponent {
 
     onClick(item) {
         if (item && item.items && item.items.length) return;
-        this.onSelected.emit();        
+        this.onSelected.emit();
     }
    
 }

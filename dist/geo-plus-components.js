@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, NgModule, Output } from '@angular/core';
+import { Component, EventEmitter, Input, NgModule, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -30,7 +30,9 @@ class GpcNavbarComponent {
                     }, {
                         label: "Item2.3"
                     }]
-            }
+            },
+            { label: "Item3" }, { label: "Item4" }, { label: "Item5" }, { label: "Item6" }, { label: "Item7" }, { label: "Item8" }, { label: "Item9" },
+            { label: "Item13" }, { label: "Item14" }, { label: "Item15" }, { label: "Item16" }, { label: "Item17" }, { label: "Item18" }, { label: "Item19" }
         ];
     }
     /**
@@ -42,8 +44,16 @@ class GpcNavbarComponent {
     /**
      * @return {?}
      */
+    ngAfterViewInit() {
+        this.onResize();
+    }
+    /**
+     * @return {?}
+     */
     onResize() {
         this.isSmall = window.innerWidth < this.mobileWidth;
+        if (this.mbar && this.mbar.nativeElement.offsetHeight > 34)
+            this.isSmall = true;
     }
     /**
      * @return {?}
@@ -56,8 +66,8 @@ GpcNavbarComponent.decorators = [
     { type: Component, args: [{
                 selector: 'gpc-navbar',
                 template: `
-      <ul class="main-navigation" *ngIf="!isSmall" (window:resize)="onResize()">
-          <li class="gpc-menu-item" *ngFor="let item of menu" (mouseover)="onMouse()">
+      <ul #mbar class="main-navigation" [style.visibility]="isSmall ? 'hidden' : 'visible'" (window:resize)="onResize()" (contextmenu)="onMouse(); $event.preventDefault()">
+          <li class="gpc-menu-item" *ngFor="let item of menu" (mouseover)="onMouse()" (contextmenu)="onMouse(); $event.preventDefault()">
               <a href="#" [routerLink]="item.routerLink">
                   <span class="fa fa-fw" *ngIf="item.icon" [ngClass]="item.icon"></span>
                   {{ item.label }}
@@ -66,9 +76,8 @@ GpcNavbarComponent.decorators = [
               <gpc-navbar-item [items]="item.items" [(hidden)]="isHidden" (onSelected)="isHidden = true" *ngIf="item.items && item.items.length"></gpc-navbar-item>
           </li>
       </ul>
-
-      <ul class="main-navigation" *ngIf="isSmall" (window:resize)="onResize()" (mouseover)="onMouse()">
-          <li class="gpc-menu-item" (mouseover)="onMouse()">
+      <ul class="main-navigation" *ngIf="isSmall" (window:resize)="onResize()" (mouseover)="onMouse()" (contextmenu)="onMouse(); $event.preventDefault()">
+          <li class="gpc-menu-item" (mouseover)="onMouse()" (contextmenu)="onMouse(); $event.preventDefault()">
               <a href="javascript:void(0)">
                   <span class="fa fa-navicon"></span>
                   <span class="gpc-icon-down fa fa-fw fa-caret-down"></span>
@@ -96,14 +105,26 @@ GpcNavbarComponent.decorators = [
         clear: both; }
 
       ul.main-navigation /deep/ {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto !important;
         list-style: none;
         padding: 0;
         margin: 0;
-        background: #288bbd; }
+        background: #288bbd;
+        overflow: visible !important;
+        -webkit-user-select: none;
+           -moz-user-select: none;
+            -ms-user-select: none;
+                user-select: none;
+        outline: 0; }
         ul.main-navigation /deep/ li {
           display: block;
           position: relative;
           float: left;
+          height: 34px;
           background: #288bbd; }
         ul.main-navigation /deep/ li ul {
           display: none;
@@ -146,6 +167,7 @@ GpcNavbarComponent.ctorParameters = () => [];
 GpcNavbarComponent.propDecorators = {
     'mobileWidth': [{ type: Input },],
     'menu': [{ type: Input },],
+    'mbar': [{ type: ViewChild, args: ['mbar',] },],
 };
 
 class GpcNavbarItemComponent {
@@ -167,9 +189,9 @@ GpcNavbarItemComponent.decorators = [
     { type: Component, args: [{
                 selector: 'gpc-navbar-item',
                 template: `
-      <ul #cul class="gpc-menu-drop-item" [ngStyle]="{'z-index':level+10000}">
-          <li class="gpc-submenu-item" *ngFor="let item of items">
-              <a href="#" [routerLink]="item.routerLink" (click)="onClick(item)">
+      <ul #cul class="gpc-menu-drop-item" [ngStyle]="{'z-index':level+10000}" (contextmenu)="$event.preventDefault()">
+          <li class="gpc-submenu-item" *ngFor="let item of items" (contextmenu)="$event.preventDefault()">
+              <a href="#" [routerLink]="item.routerLink" (click)="onClick(item)" (contextmenu)="onClick(item); $event.preventDefault()">
                   <span class="fa fa-fw " *ngIf="item.icon" [ngClass]="item.icon"></span>
                   {{ item.label }}
                   <span class="gpc-icon-right fa fa-fw fa-caret-right" *ngIf="item.items"></span></a>

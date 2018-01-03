@@ -1,6 +1,6 @@
-<ul #cul class="gpc-menu-drop-item" [ngStyle]="{'z-index':level+10000}">
-    <li class="gpc-submenu-item" *ngFor="let item of items">
-        <a href="#" [routerLink]="item.routerLink" (click)="onClick(item)">
+<ul #cul class="gpc-menu-drop-item" [ngStyle]="{'z-index':level+10000}" (contextmenu)="$event.preventDefault()">
+    <li class="gpc-submenu-item" *ngFor="let item of items" (contextmenu)="$event.preventDefault()">
+        <a href="#" [routerLink]="item.routerLink" (click)="onClick(item)" (contextmenu)="onClick(item); $event.preventDefault()">
             <span class="fa fa-fw " *ngIf="item.icon" [ngClass]="item.icon"></span>
             {{ item.label }}
             <span class="gpc-icon-right fa fa-fw fa-caret-right" *ngIf="item.items"></span></a>
