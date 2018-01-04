@@ -1,11 +1,11 @@
 <ul #mbar class="main-navigation" [style.visibility]="isSmall ? 'hidden' : 'visible'" (window:resize)="onResize()" (contextmenu)="onMouse(); $event.preventDefault()">
-    <li class="gpc-menu-item" *ngFor="let item of menu" (mouseover)="onMouse()" (contextmenu)="onMouse(); $event.preventDefault()">
+    <li [ngClass]="{'m-right': item.right }" class="gpc-menu-item" *ngFor="let item of menu" (mouseover)="onMouse()" (contextmenu)="onMouse(); $event.preventDefault()">
         <a href="#" [routerLink]="item.routerLink">
             <span class="fa fa-fw" *ngIf="item.icon" [ngClass]="item.icon"></span>
             {{ item.label }}
             <span class="gpc-icon-down fa fa-fw fa-caret-down" *ngIf="item.items  && item.items.length"></span>
         </a>
-        <gpc-navbar-item [items]="item.items" [(hidden)]="isHidden" (onSelected)="isHidden = true" *ngIf="item.items && item.items.length"></gpc-navbar-item>
+        <gpc-navbar-item [items]="item.items" [(hidden)]="isHidden" [right]="item.right" (onSelected)="isHidden = true" *ngIf="item.items && item.items.length"></gpc-navbar-item>
     </li>
 </ul>
 <ul class="main-navigation" *ngIf="isSmall" (window:resize)="onResize()" (mouseover)="onMouse()" (contextmenu)="onMouse(); $event.preventDefault()">

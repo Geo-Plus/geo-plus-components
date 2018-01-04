@@ -55,11 +55,16 @@ ul.main-navigation /deep/ {
     li a:hover { 
         color: white;
     }
+
     li:hover > gpc-navbar-item > ul {
         display: block;
         position: absolute;
     }
-      
+    
+    li.m-right:hover > gpc-navbar-item > ul {
+        right: 0;
+    }
+
     li:hover li { float: none; }
     
     li:hover a { 
@@ -72,11 +77,21 @@ ul.main-navigation /deep/ {
         color: white;
     }
       
-    ul ul {
+    li ul ul {
         left: 100%;
         top: 0;
     }
-      
+
+    li.m-right {
+        float: right;
+    }
+
+    li.m-right ul ul {
+        left: initial;
+        right: 100%;
+        top: 0;
+    }
+    
 }
 
 .gpc-menu-item {

@@ -3,7 +3,9 @@
         <a href="#" [routerLink]="item.routerLink" (click)="onClick(item)" (contextmenu)="onClick(item); $event.preventDefault()">
             <span class="fa fa-fw " *ngIf="item.icon" [ngClass]="item.icon"></span>
             {{ item.label }}
-            <span class="gpc-icon-right fa fa-fw fa-caret-right" *ngIf="item.items"></span></a>
-        <gpc-navbar-item [level]="level + 1" (onSelected)="onClick()" [ngClass]="{'-hasSubmenu':true}" [items]="item.items" *ngIf="item.items && item.items.length"></gpc-navbar-item>
+            <span class="gpc-icon-right fa fa-fw fa-caret-right" *ngIf="item.items && !right"></span>
+            <span class="gpc-icon-right fa fa-fw fa-caret-left" *ngIf="item.items && right"></span>
+        </a>
+        <gpc-navbar-item [level]="level + 1" [right]="right" (onSelected)="onClick()" [ngClass]="{'-hasSubmenu':true}" [items]="item.items" *ngIf="item.items && item.items.length"></gpc-navbar-item>
     </li>
 </ul>

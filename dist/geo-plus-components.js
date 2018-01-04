@@ -6,10 +6,36 @@ class GpcNavbarComponent {
     constructor() {
         this.mobileWidth = 800;
         this.menu = [{
-                label: "Item1"
+                label: "Item1",
+                icon: "fa-navicon"
             },
             {
                 label: "Item2",
+                icon: "fa-navicon",
+                right: true,
+                items: [{
+                        label: "Item2.1"
+                    }, {
+                        label: "Item2.2",
+                        items: [
+                            {
+                                label: "Item2.2.1"
+                            },
+                            {
+                                label: "Item2.2.2",
+                                items: [{
+                                        label: "Item2.2.2.1"
+                                    }, {
+                                        label: "Item2.2.2.2"
+                                    }]
+                            }
+                        ]
+                    }, {
+                        label: "Item2.3"
+                    }]
+            },
+            {
+                label: "ItemA",
                 items: [{
                         label: "Item2.1"
                     }, {
@@ -67,13 +93,13 @@ GpcNavbarComponent.decorators = [
                 selector: 'gpc-navbar',
                 template: `
       <ul #mbar class="main-navigation" [style.visibility]="isSmall ? 'hidden' : 'visible'" (window:resize)="onResize()" (contextmenu)="onMouse(); $event.preventDefault()">
-          <li class="gpc-menu-item" *ngFor="let item of menu" (mouseover)="onMouse()" (contextmenu)="onMouse(); $event.preventDefault()">
+          <li [ngClass]="{'m-right': item.right }" class="gpc-menu-item" *ngFor="let item of menu" (mouseover)="onMouse()" (contextmenu)="onMouse(); $event.preventDefault()">
               <a href="#" [routerLink]="item.routerLink">
                   <span class="fa fa-fw" *ngIf="item.icon" [ngClass]="item.icon"></span>
                   {{ item.label }}
                   <span class="gpc-icon-down fa fa-fw fa-caret-down" *ngIf="item.items  && item.items.length"></span>
               </a>
-              <gpc-navbar-item [items]="item.items" [(hidden)]="isHidden" (onSelected)="isHidden = true" *ngIf="item.items && item.items.length"></gpc-navbar-item>
+              <gpc-navbar-item [items]="item.items" [(hidden)]="isHidden" [right]="item.right" (onSelected)="isHidden = true" *ngIf="item.items && item.items.length"></gpc-navbar-item>
           </li>
       </ul>
       <ul class="main-navigation" *ngIf="isSmall" (window:resize)="onResize()" (mouseover)="onMouse()" (contextmenu)="onMouse(); $event.preventDefault()">
@@ -143,6 +169,8 @@ GpcNavbarComponent.decorators = [
         ul.main-navigation /deep/ li:hover > gpc-navbar-item > ul {
           display: block;
           position: absolute; }
+        ul.main-navigation /deep/ li.m-right:hover > gpc-navbar-item > ul {
+          right: 0; }
         ul.main-navigation /deep/ li:hover li {
           float: none; }
         ul.main-navigation /deep/ li:hover a {
@@ -151,8 +179,14 @@ GpcNavbarComponent.decorators = [
         ul.main-navigation /deep/ li:hover li a:hover {
           background: #2c3e50;
           color: white; }
-        ul.main-navigation /deep/ ul ul {
+        ul.main-navigation /deep/ li ul ul {
           left: 100%;
+          top: 0; }
+        ul.main-navigation /deep/ li.m-right {
+          float: right; }
+        ul.main-navigation /deep/ li.m-right ul ul {
+          left: initial;
+          right: 100%;
           top: 0; }
 
       .gpc-menu-item {
@@ -194,8 +228,10 @@ GpcNavbarItemComponent.decorators = [
               <a href="#" [routerLink]="item.routerLink" (click)="onClick(item)" (contextmenu)="onClick(item); $event.preventDefault()">
                   <span class="fa fa-fw " *ngIf="item.icon" [ngClass]="item.icon"></span>
                   {{ item.label }}
-                  <span class="gpc-icon-right fa fa-fw fa-caret-right" *ngIf="item.items"></span></a>
-              <gpc-navbar-item [level]="level + 1" (onSelected)="onClick()" [ngClass]="{'-hasSubmenu':true}" [items]="item.items" *ngIf="item.items && item.items.length"></gpc-navbar-item>
+                  <span class="gpc-icon-right fa fa-fw fa-caret-right" *ngIf="item.items && !right"></span>
+                  <span class="gpc-icon-right fa fa-fw fa-caret-left" *ngIf="item.items && right"></span>
+              </a>
+              <gpc-navbar-item [level]="level + 1" [right]="right" (onSelected)="onClick()" [ngClass]="{'-hasSubmenu':true}" [items]="item.items" *ngIf="item.items && item.items.length"></gpc-navbar-item>
           </li>
       </ul>
     `,
@@ -222,6 +258,7 @@ GpcNavbarItemComponent.ctorParameters = () => [];
 GpcNavbarItemComponent.propDecorators = {
     'items': [{ type: Input },],
     'level': [{ type: Input },],
+    'right': [{ type: Input },],
     'onSelected': [{ type: Output },],
 };
 

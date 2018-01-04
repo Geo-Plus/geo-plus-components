@@ -9,6 +9,7 @@ export class GpcNavbarItemComponent {
 
     @Input() items:any;
     @Input() level:number = 1;
+    @Input() right:boolean;
     @Output() onSelected:EventEmitter<any> = new EventEmitter;
 
     constructor() { }
